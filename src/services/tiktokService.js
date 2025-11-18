@@ -43,16 +43,15 @@ class TikTokService {
     }
 
     try {
-      // Prepare Apify actor input
+      // Prepare Apify actor input according to silva95gustavo/tiktok-ads-scraper requirements
       const input = {
-        searchKeyword: search_term,
-        country: country,
-        maxResults: limit
+        startUrls: [
+          {
+            url: `https://library.tiktok.com/ads?keyword=${encodeURIComponent(search_term)}&region=${country}`
+          }
+        ],
+        maxItems: limit
       };
-
-      // Add date filters if provided
-      if (date_from) input.startDate = date_from;
-      if (date_to) input.endDate = date_to;
 
       console.log('🎵 Calling Apify TikTok Ads Scraper with input:', input);
 
